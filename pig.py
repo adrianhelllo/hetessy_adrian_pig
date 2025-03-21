@@ -39,5 +39,7 @@ for plr in range(plrs):
             rolling = False
             print(f"Player {plr + 1} has finished rolling. Moving on to Player {plr + 2}...", end=end)
 
+highest_scorer = max(pts, key=pts.get)
 print("All players have now finished rolling. Let's see the winner...", end=end)
-print(f"The winner is Player {max(pts) + 1} with {pts[max(pts)]} points!", end=end)
+print(pts)
+print(f"The winner is Player {highest_scorer + 1} with {pts[highest_scorer]} points!", end=end)
