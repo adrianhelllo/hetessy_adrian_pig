@@ -3,8 +3,20 @@ from random import randint
 min_val = 1
 max_val = 6
 
-plrs = int(input("Number of players: "))
+def check_input():
+    plrs = input("Number of players: ")
+
+    try:
+        plrs = int(plrs)
+        return plrs
+    except ValueError or TypeError:
+        print("Sorry, I don't understand that. Try again.")
+        return check_input()
+
+plrs = check_input()
 pts = {i: 0 for i in range(plrs)}
+
+
 
 end = "\n\n"
 print(end)
@@ -37,9 +49,31 @@ for plr in range(plrs):
             curr_roll = roll(plr)
         elif again == "no":
             rolling = False
-            print(f"Player {plr + 1} has finished rolling. Moving on to Player {plr + 2}...", end=end)
+            print(f"Player {plr + 1} has finished rolling.", end=end)
+            
+            if plr + 1 != plrs:
+                print(f"Moving on to Player {plr + 2}...", end=end)
+        
 
-highest_scorer = max(pts, key=pts.get)
-print("All players have now finished rolling. Let's see the winner...", end=end)
-print(pts)
-print(f"The winner is Player {highest_scorer + 1} with {pts[highest_scorer]} points!", end=end)
+highest_scorer = {}
+max = 0
+
+for value in pts.values():
+    if value > max:
+        max = value
+
+for key, value in pts.items():
+    if value == max:
+        highest_scorer[key + 1] = value
+
+
+print("All players have now finished rolling. Let's see the winner(s)...", end=end)
+
+winners = list(highest_scorer.keys())
+winners_pts = list(highest_scorer.values())
+
+if len(highest_scorer) == 1:
+    print(f"The winner is Player {winners[0]} with {winners_pts[0]} points!", end=end)
+else:
+    winners_str = [str(winner) for winner in winners]
+    print(f"The winners are Players {', '.join(winners_str)} with {winners_pts[0]} points respectively in {len(winners)}-way tie!") 
