@@ -76,4 +76,4 @@ if len(highest_scorer) == 1:
     print(f"The winner is Player {winners[0]} with {winners_pts[0]} points!", end=end)
 else:
     winners_str = [str(winner) for winner in winners]
-    print(f"The winners are Players {', '.join(winners_str)} with {winners_pts[0]} points respectively in {len(winners)}-way tie!") 
+    print(f"The winners are Players {', '.join(winners_str)} with {winners_pts[0]} points each in a {len(winners)}-way tie!") 
